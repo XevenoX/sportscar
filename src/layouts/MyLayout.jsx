@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Layout, Menu, Breadcrumb, Button, Dropdown, Avatar } from 'antd';
-import { DatabaseOutlined, HomeOutlined, UserOutlined, DollarOutlined, CarryOutOutlined, ShoppingOutlined, EditOutlined, LogoutOutlined } from '@ant-design/icons';
+import { Layout, Menu, Breadcrumb, Button, Dropdown, Avatar, Calendar, Popover } from 'antd';
+import { DatabaseOutlined, HomeOutlined, UserOutlined, DollarOutlined, CarryOutOutlined, ShoppingOutlined, EditOutlined, LogoutOutlined, CalendarOutlined } from '@ant-design/icons';
+import moment from "moment";
 import 'antd/dist/antd.css';
 import './MyLayout.css';
 import { Route, Switch } from "react-router-dom";
@@ -19,7 +20,7 @@ const { Header, Footer, Content } = Layout;
 
 const user = {
     name: 'user name',
-    avatar: 'https://profile-avatar.csdnimg.cn/default.jpg!1'
+    avatar: 'https://joeschmoe.io/api/v1/random'
 };
 
 function getItem(label, key, icon, children, type) {
@@ -66,6 +67,17 @@ class MyLayout extends Component {
                 </Menu.Item>
             </Menu>
         );
+        const content = (
+            <div
+                style={{
+                    width: "300px",
+                    border: "1px solid #f56a00",
+                    borderradius: "2px",
+                }}
+            >
+                <Calendar fullscreen={false} />
+            </div>
+        );
         return (
             <Layout>
                 <Header
@@ -78,6 +90,9 @@ class MyLayout extends Component {
                 >
                     <img src={logo} className="logo" />
                     <Menu
+                        style={{
+                            float: 'left'
+                        }}
                         mode="horizontal"
                         onClick={this.handleClick}
                         defaultSelectedKeys={['/Home']}
@@ -98,24 +113,30 @@ class MyLayout extends Component {
                         ]}
                     />
                     <span style={{
-                            margin:'0 0 0 1200px',
-                        }}>
-                    <Dropdown overlay={menu} placement="bottomCenter"
-                        
-                    >
-                        <Button
-                            type="text"
-                            size="large"
-                            icon={
-                                <Avatar
-                                    src={`http://friday.nat100.top${user.avatar}`}
-                                    size="large"
-                                />
-                            }
-                        >
-                            &nbsp;&nbsp;{user.name}
-                        </Button>
-                    </Dropdown>
+                        float: 'right'
+                    }}>
+                        <Popover placement="bottom" content={content} trigger="click">
+                            <Button danger shape="round" size="small" style={{ marginRight:"25px" }}
+                            >
+                                <CalendarOutlined />
+                                Today&nbsp; : &nbsp;{moment().format("YYYY-MM-DD")}
+                            </Button>
+                        </Popover>
+                        <Dropdown overlay={menu} placement="bottomCenter">
+                            <Button
+                                type="text"
+                                size="large"
+                                icon={
+                                    <Avatar
+                                        style={{ backgroundColor: '#f56a00' }}
+                                        src={user.avatar}
+                                        size="large"
+                                    />
+                                }
+                            >
+                                &nbsp;&nbsp;{user.name}
+                            </Button>
+                        </Dropdown>
                     </span>
                 </Header>
                 <Content
