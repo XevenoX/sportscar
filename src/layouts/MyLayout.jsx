@@ -13,6 +13,7 @@ import QuotationsManagement from "../pages/QuotationsManagement";
 import ReceiveGoods from "../pages/ReceiveGoods";
 import RequisitionManagement from "../pages/RequisitionManagement";
 import SupplierManagement from "../pages/SupplierManagement";
+import PersonalManagement from "../pages/PersonalManagement";
 import Home from "../pages/Home";
 import logo from "../graphs/logo.png";
 
@@ -51,7 +52,7 @@ class MyLayout extends Component {
                 <Menu.Item key="/Home" icon={<HomeOutlined />}>
                     个人首页
                 </Menu.Item>
-                <Menu.Item key="/Home/personalmanagement" icon={<EditOutlined />}>
+                <Menu.Item key="/Home/personalManagement" icon={<EditOutlined />}>
                     个人设置
                 </Menu.Item>
                 <Menu.Divider />
@@ -189,6 +190,10 @@ class MyLayout extends Component {
                             <Route
                                 path="/Home/financialManagement"
                                 component={FinancialManagement}
+                            />
+                            <Route
+                                path="/Home/personalManagement"
+                                component={PersonalManagement}
                             />
                             <Route path="/Home" component={Home} />
                         </Switch>
