@@ -89,7 +89,7 @@ class MyLayout extends Component {
                         width: '100%',
                     }}
                 >
-                    <img src={logo} className="logo" />
+                    <img src={logo} alt="error" className="logo" />
                     <Menu
                         style={{
                             float: 'left'
